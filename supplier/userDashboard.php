@@ -92,8 +92,8 @@ if (!isset($_SESSION['name']) && !isset($_SESSION['user_id'])) {
       <form action="" class="search" method="get">
         <div class="input-group">
           <div class="form-outline" data-mdb-input-init>
-            <input id="search-input" type="search" id="form1" class="form-control" />
-            <label class="form-label" for="form1">Search</label>
+            <input id="search-input" type="search" id="form1" class="form-control" name="search"/>
+            <label class="form-label" for="form1">Search Items</label>
           </div>
           <button id="search-button" type="button" class="btn btn-primary" name="search">
             <i class="fas fa-search"></i>
@@ -130,12 +130,20 @@ if (!isset($_SESSION['name']) && !isset($_SESSION['user_id'])) {
     require "includes/db.inc.php";
     $user_id = $_SESSION['user_id'];
     $type = isset($_GET['type']) ? $_GET['type'] : null;
+    $search = isset($_GET['search']) ? $_GET['search'] : null;
 
     if ($type) {
       // If $type is not null, filter the items by type
       $query = "SELECT * FROM `tblproducts` WHERE `type` = ? ORDER BY itemName DESC";
       $stmt = mysqli_prepare($conn, $query);
       mysqli_stmt_bind_param($stmt, "s", $type);
+      mysqli_stmt_execute($stmt);
+      $result = mysqli_stmt_get_result($stmt);
+    } else if ($search) {
+      // If $search is not null, filter the items by search
+      $query = "SELECT * FROM `tblproducts` WHERE `itemName` LIKE CONCAT('%', ?, '%') ORDER BY itemName DESC";
+      $stmt = mysqli_prepare($conn, $query);
+      mysqli_stmt_bind_param($stmt, "s", $search);
       mysqli_stmt_execute($stmt);
       $result = mysqli_stmt_get_result($stmt);
     } else {
