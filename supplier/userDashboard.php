@@ -43,13 +43,13 @@ if (!isset($_SESSION['name']) && !isset($_SESSION['user_id'])) {
         <!-- Left links -->
         <ul class="navbar-nav me-auto mb-2 mb-lg-0">
           <li class="nav-item">
-            <a class="nav-link" href="#?type=mattresses">Mattresses</a>
+            <a class="nav-link" href="./userDashboard.php?type=mattresses">Mattresses</a>
           </li>
           <li class="nav-item">
-            <a class="nav-link" href="#?type=pillows">Pillows</a>
+            <a class="nav-link" href="./userDashboard.php?type=pillows">Pillows</a>
           </li>
           <li class="nav-item">
-            <a class="nav-link" href="#?type=accessories">Accessories</a>
+            <a class="nav-link" href="./userDashboard.php?type=accessories">Accessories</a>
           </li>
         </ul>
         <!-- Left links -->
