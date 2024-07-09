@@ -151,8 +151,7 @@ session_start();
       mysqli_stmt_execute($stmt);
       $result = mysqli_stmt_get_result($stmt);
     } else if ($search) {
-      // If $search is not null, filter the items by search
-      $query = "SELECT * FROM `tblproducts` WHERE `itemName` LIKE CONCAT('%', ?, '%') ORDER BY itemName DESC";
+      $query = "SELECT * FROM `tblproducts` WHERE `name` LIKE CONCAT('%', ?, '%') ORDER BY `name` DESC";
       $stmt = mysqli_prepare($conn, $query);
       mysqli_stmt_bind_param($stmt, "s", $search);
       mysqli_stmt_execute($stmt);
