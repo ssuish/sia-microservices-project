@@ -113,8 +113,8 @@ if (!isset($_SESSION['name']) && !isset($_SESSION['user_id'])) {
         <div class="d-flex justify-content-center align-items-center h-100">
           <div class="text-white">
             <h1 class="display-1 mb-3">Coolex</h1>
-            <h4 class="mb-3">Welcome <?php echo "Welcome! " . $_SESSION['name'] ?></h4>
-            <a data-mdb-ripple-init class="btn btn-outline-light btn-lg" href="#!" role="button">Call to action</a>
+            <h4 class="mb-3"><?php echo "Welcome! " . $_SESSION['name']; ?></h4>
+            <a data-mdb-ripple-init class="btn btn-outline-light btn-lg" href="#!" role="button">Explore and Shop</a>
           </div>
         </div>
       </div>

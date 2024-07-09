@@ -14,7 +14,7 @@ if (isset($_POST['btnLogin']))
         session_start();
 
         $resultSet = mysqli_fetch_assoc($result);
-        $_SESSION["name"] = $resultSet["firstname"];
+        $_SESSION["name"] = $resultSet["username"];
         $_SESSION["user_id"] = $resultSet["userID"];
 
         mysqli_close($conn);
