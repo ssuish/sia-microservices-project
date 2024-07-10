@@ -193,7 +193,7 @@
           <li class="nav-item">
             <a class="nav-link" href="login.php">Login</a>
           </li>
-       
+
         </ul>
       </div>
     </div>
@@ -222,7 +222,8 @@
       <div class="row">
         <div class="col-lg-4 col-md-6 mb-4">
           <div class="product-card">
-          <img src="https://images.unsplash.com/photo-1560807707-8cc77767d783" alt="Mattress">            <div class="card-body">
+            <img src="https://images.unsplash.com/photo-1560807707-8cc77767d783" alt="Mattress">
+            <div class="card-body">
               <h5>Deluxe Mattress</h5>
               <p>High-quality mattress for supreme comfort.</p>
               <a href="#" class="btn">Buy Now</a>

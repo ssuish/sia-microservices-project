@@ -1,18 +1,20 @@
 <?php
+session_start();
 require "includes/db.inc.php";
 ?>
 
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    
+
     <!-- bootstrap cdn -->
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC" crossorigin="anonymous">
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.min.css">
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js" integrity="sha384-MrcW6ZMFYlzcLA8Nl+NtUVF0sA7MsXsP1UyJoMp4YLEuNSfAP+JcXn/tWtIaxVXM" crossorigin="anonymous"></script>
-    
+
     <title></title>
     <link rel="icon" href="#" type="image/icon type">
 
@@ -21,13 +23,13 @@ require "includes/db.inc.php";
             background-color: #9191ad !important;
         }
 
-       .text {
+        .text {
             color: black;
             font-weight: bold;
             font-size: 20px;
-       }
+        }
     </style>
-    
+
     <script>
         function confirmDelete(productID) {
             if (confirm("Are you sure you want to delete this item?")) {
@@ -36,6 +38,7 @@ require "includes/db.inc.php";
         }
     </script>
 </head>
+
 <body>
     <div class="container-fluid">
         <div class="row">
@@ -45,7 +48,7 @@ require "includes/db.inc.php";
                 <nav class="navbar navbar-expand-lg navbar-light bg-transparent border border-bottom">
                     <div class="container-fluid">
                         <div>
-                        <img src="../img/logo.png" class="rounded-circle" height="50" alt="User Avatar" loading="lazy" />
+                            <img src="../img/logo.png" class="rounded-circle" height="50" alt="User Avatar" loading="lazy" />
                         </div>
                         <div class="d-flex justify-content-lg-end justify-content-md-end justify-content-center collapse navbar-collapse" id="navbarSupportedContent">
                             <!-- logout button -->
@@ -53,7 +56,7 @@ require "includes/db.inc.php";
                         </div>
                     </div>
                 </nav>
-                
+
                 <!-- table label -->
                 <div class="row p-lg-5 p-3 text-lg-start text-center m-0">
                     <h1 class="col-lg-6 col-md-12">Item List</h1>
@@ -67,7 +70,7 @@ require "includes/db.inc.php";
                         </div>
                     </div>
                 </div>
-               
+
                 <!-- item list table -->
                 <div class="table-responsive px-5 pb-5">
                     <table class="table table-hover text-nowrap">
@@ -88,13 +91,14 @@ require "includes/db.inc.php";
                             </tr>
                         </thead>
                         <tbody>
-                            <?php 
-                                if (isset($_POST['btnSearch'])) {
-                                    // post from search form
-                                    $search = $_POST['search'];
-                            
-                                    // query to search data from search form
-                                    $query = "SELECT * FROM tblproducts
+                            <?php
+                            if (isset($_POST['btnSearch'])) {
+                                // post from search form
+                                $search = $_POST['search'];
+                                $_SESSION['search'] = $search;
+
+                                // query to search data from search form
+                                $query = "SELECT * FROM tblproducts
                                         WHERE productID LIKE '%$search%'
                                         OR name LIKE '%$search%'
                                         OR type LIKE '%$search%'
@@ -105,33 +109,33 @@ require "includes/db.inc.php";
                                         OR warranty LIKE '%$search%'
                                         OR thumbnail LIKE '%$search%'
                                         OR currency LIKE '%$search%';";
-                                    $result = mysqli_query($conn, $query);
+                                $result = mysqli_query($conn, $query);
 
-                                    if (mysqli_num_rows($result) > 0) {
-                                        while ($row = mysqli_fetch_assoc($result)) {   
-                                ?>
-                                <tr>
-                                    <!-- table data -->
-                                    <td><?php echo $row["productID"]; ?></td>
-                                    <td><?php echo $row["name"]; ?></td>
-                                    <td><?php echo $row["type"]; ?></td>
-                                    <td><?php echo $row["price"]; ?></td>
-                                    <td><?php echo $row["size"]; ?></td>
-                                    <td><?php echo $row["color"]; ?></td>
-                                    <td><?php echo $row["thickness"]; ?></td>
-                                    <td><?php echo $row["warranty"]; ?></td>
-                                    <td><?php echo $row["thumbnail"]; ?></td>
-                                    <td><?php echo $row["currency"]; ?></td>
-                                    <td>
-                                        <!-- edit button -->
-                                        <a href="edit_product.php?editProductID=<?php echo $row['productID'];?>" name="btnEdit" class="btn btn-primary"><i class="bi bi-pencil-square"></i></a>
-                                        <!-- delete button -->
-                                        <button onclick="confirmDelete(<?php echo $row['productID']; ?>)" class="btn btn-danger"><i class="bi bi-trash3"></i></button>
-                                    </td>
-                                </tr>
-                                <?php 
-                                        }
+                                if (mysqli_num_rows($result) > 0) {
+                                    while ($row = mysqli_fetch_assoc($result)) {
+                            ?>
+                                        <tr>
+                                            <!-- table data -->
+                                            <td><?php echo $row["productID"]; ?></td>
+                                            <td><?php echo $row["name"]; ?></td>
+                                            <td><?php echo $row["type"]; ?></td>
+                                            <td><?php echo $row["price"]; ?></td>
+                                            <td><?php echo $row["size"]; ?></td>
+                                            <td><?php echo $row["color"]; ?></td>
+                                            <td><?php echo $row["thickness"]; ?></td>
+                                            <td><?php echo $row["warranty"]; ?></td>
+                                            <td><?php echo $row["thumbnail"]; ?></td>
+                                            <td><?php echo $row["currency"]; ?></td>
+                                            <td>
+                                                <!-- edit button -->
+                                                <a href="edit_product.php?editProductID=<?php echo $row['productID']; ?>" name="btnEdit" class="btn btn-primary"><i class="bi bi-pencil-square"></i></a>
+                                                <!-- delete button -->
+                                                <button onclick="confirmDelete(<?php echo $row['productID']; ?>)" class="btn btn-danger"><i class="bi bi-trash3"></i></button>
+                                            </td>
+                                        </tr>
+                                <?php
                                     }
+                                }
                                 ?>
                                 <?php } else {
                                 $query = "SELECT * FROM tblproducts"; //select all products
@@ -140,25 +144,25 @@ require "includes/db.inc.php";
                                 if (mysqli_num_rows($result) > 0) {
                                     while ($row = mysqli_fetch_assoc($result)) {
                                 ?>
-                                <tr>
-                                    <!-- table data -->
-                                    <td><?php echo $row["productID"]; ?></td>
-                                    <td><?php echo $row["name"]; ?></td>
-                                    <td><?php echo $row["type"]; ?></td>
-                                    <td><?php echo $row["price"]; ?></td>
-                                    <td><?php echo $row["size"]; ?></td>
-                                    <td><?php echo $row["color"]; ?></td>
-                                    <td><?php echo $row["thickness"]; ?></td>
-                                    <td><?php echo $row["warranty"]; ?></td>
-                                    <td><?php echo $row["thumbnail"]; ?></td>
-                                    <td><?php echo $row["currency"]; ?></td>
-                                    <td>
-                                        <!-- edit button -->
-                                        <a href="edit_product.php?editProductID=<?php echo $row['productID'];?>" name="btnEdit" class="btn btn-primary"><i class="bi bi-pencil-square"></i></a>
-                                        <!-- delete button -->
-                                        <button onclick="confirmDelete(<?php echo $row['productID']; ?>)" class="btn btn-danger"><i class="bi bi-trash3"></i></button>
-                                    </td>
-                                </tr>
+                                        <tr>
+                                            <!-- table data -->
+                                            <td><?php echo $row["productID"]; ?></td>
+                                            <td><?php echo $row["name"]; ?></td>
+                                            <td><?php echo $row["type"]; ?></td>
+                                            <td><?php echo $row["price"]; ?></td>
+                                            <td><?php echo $row["size"]; ?></td>
+                                            <td><?php echo $row["color"]; ?></td>
+                                            <td><?php echo $row["thickness"]; ?></td>
+                                            <td><?php echo $row["warranty"]; ?></td>
+                                            <td><?php echo $row["thumbnail"]; ?></td>
+                                            <td><?php echo $row["currency"]; ?></td>
+                                            <td>
+                                                <!-- edit button -->
+                                                <a href="edit_product.php?editProductID=<?php echo $row['productID']; ?>" name="btnEdit" class="btn btn-primary"><i class="bi bi-pencil-square"></i></a>
+                                                <!-- delete button -->
+                                                <button onclick="confirmDelete(<?php echo $row['productID']; ?>)" class="btn btn-danger"><i class="bi bi-trash3"></i></button>
+                                            </td>
+                                        </tr>
                             <?php
                                     }
                                 }
@@ -168,7 +172,7 @@ require "includes/db.inc.php";
                     </table>
                 </div>
                 <!-- add item button -->
-                <div class="text-end py-5 pe-5">                    
+                <div class="text-end py-2 pe-2">
                     <!-- Button trigger modal -->
                     <button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#addItemModal">
                         Add Item
@@ -206,37 +210,37 @@ require "includes/db.inc.php";
                                             </div>
                                             <div class="col-6">
                                                 <div class="form-floating mb-3">
-                                                    <input type="text" class="form-control" name="size" id="size"  placeholder="" required>
+                                                    <input type="text" class="form-control" name="size" id="size" placeholder="" required>
                                                     <label for="date" class="form-label">Size<i class="text-danger">*</i></label>
                                                 </div>
                                             </div>
                                             <div class="col-6">
                                                 <div class="form-floating mb-3">
-                                                    <input type="text" class="form-control" name="color" id="color"  placeholder="" required>
+                                                    <input type="text" class="form-control" name="color" id="color" placeholder="" required>
                                                     <label for="date" class="form-label">Color<i class="text-danger">*</i></label>
                                                 </div>
                                             </div>
                                             <div class="col-6">
                                                 <div class="form-floating mb-3">
-                                                    <input type="text" class="form-control" name="thickness" id="thickness"  placeholder="" required>
+                                                    <input type="text" class="form-control" name="thickness" id="thickness" placeholder="" required>
                                                     <label for="date" class="form-label">Thickness<i class="text-danger">*</i></label>
                                                 </div>
                                             </div>
                                             <div class="col-6">
                                                 <div class="form-floating mb-3">
-                                                    <input type="text" class="form-control" name="warranty" id="warranty"  placeholder="" required>
+                                                    <input type="text" class="form-control" name="warranty" id="warranty" placeholder="" required>
                                                     <label for="date" class="form-label">Warranty<i class="text-danger">*</i></label>
                                                 </div>
                                             </div>
                                             <div class="col-6">
-                                        <div class="form-floating mb-3">
-                                            <input type="file" class="form-control" name="thumbnail" id="thumbnail" required>
-                                            <label for="thumbnail" class="form-label">Thumbnail<i class="text-danger">*</i></label>
-                                        </div>
-                                    </div>
+                                                <div class="form-floating mb-3">
+                                                    <input type="file" class="form-control" name="thumbnail" id="thumbnail" required>
+                                                    <label for="thumbnail" class="form-label">Thumbnail<i class="text-danger">*</i></label>
+                                                </div>
+                                            </div>
                                             <div class="col-6">
                                                 <div class="form-floating mb-3">
-                                                    <input type="text" class="form-control" name="currency" id="currency"  placeholder="" required>
+                                                    <input type="text" class="form-control" name="currency" id="currency" placeholder="" required>
                                                     <label for="date" class="form-label">Currency<i class="text-danger">*</i></label>
                                                 </div>
                                             </div>
@@ -252,9 +256,16 @@ require "includes/db.inc.php";
                         </div>
                     </form>
                 </div>
+                <!-- download button -->
+                <div class="text-center py-5 pe-5">
+                    <form action="./downloadRecords.php" method="POST">
+                    <button type="submit" name="btnDownload" class="btn btn-primary" data-mdb-ripple-init>Download CSV</button>
+                    </form>
+                </div>
             </div>
-            
+
         </div>
-    </div> 
+    </div>
 </body>
+
 </html>
