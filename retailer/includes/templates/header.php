@@ -24,7 +24,7 @@
     <div class="container">
         <a href="index.php" style="margin-right: 20px;"><span class="pull-right">Home</span></a>
         <a href="login.php"><span class="pull-right">Login/SignUp&nbsp;&nbsp;&nbsp;&nbsp;</span></a>
-        <a href="sia-uratex/includes/login.php"><span class="pull-right">Admin Side&nbsp;&nbsp;&nbsp;&nbsp;</span></a>
+        <a href="RetailerAdmin/includes/login.php"><span class="pull-right">Admin Side&nbsp;&nbsp;&nbsp;&nbsp;</span></a>
 
     </div>
 </div>
