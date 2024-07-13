@@ -1,3 +1,14 @@
+<<<<<<< HEAD
+=======
+<?php 
+session_start();  
+
+  if (!isset($_SESSION['tbluseraccounts'])) {
+    header('Location: index.php');
+  }
+?>
+
+>>>>>>> 2ca820e6270aed379519dc69bfb6c06aaec24b64
 <!DOCTYPE html>
 <html lang="en">
 

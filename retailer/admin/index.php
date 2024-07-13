@@ -27,12 +27,20 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') { // if the HTML Form is submitted wit
     $hashedPass = sha1($password); // Hashing the passwords for security (to protect passwords from being stolen if a hacker could hack the database)
 
     // Checking if the user (ADMIN only) exists in the database
+<<<<<<< HEAD
     $stmt = $con->prepare('SELECT `userID`, `username`, `firstName`, `lastName`, `email` FROM `tbluseraccounts` WHERE `username` = ? AND `password` = ? AND `userRole` = \'SupplierAdmin\' LIMIT 1');
+=======
+    $stmt = $con->prepare('SELECT `userID`, `username`, `firstName`, `lastName`, `email` FROM `tbluseraccounts` WHERE `username` = ? AND `password` = ? AND `userRole` = \'SupplierAdmin\' LIMIT 1'); 
+>>>>>>> 2ca820e6270aed379519dc69bfb6c06aaec24b64
     $stmt->execute(array(
         $username, $hashedPass
     ));
 
+<<<<<<< HEAD
     $row = $stmt->fetch(); // to print the $row['userID'] for the session below
+=======
+    $row = $stmt->fetch();// to print the $row['userID'] for the session below
+>>>>>>> 2ca820e6270aed379519dc69bfb6c06aaec24b64
     $count = $stmt->rowCount(); // returns the number of rows affected by the last SQL statement(from execute())
 
     // If $count > 0, this means that database contains a record about that Username who tries to login (there's an admin with the said credentials), create their Session and allow them to login
@@ -48,6 +56,7 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') { // if the HTML Form is submitted wit
 }
 
 ?>
+<<<<<<< HEAD
 
 <form class="login" action="<?php echo $_SERVER['PHP_SELF']; ?>" method="POST"><!--Form will submit data to itself and not to another page-->
     <h4 class="text-center"><b>Admin Panel Login</b></h4>
@@ -59,4 +68,17 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') { // if the HTML Form is submitted wit
 
 
 <!-- Footer -->
+=======
+        
+        <form class="login" action="<?php echo $_SERVER['PHP_SELF']; ?>" method="POST"><!--Form will submit data to itself and not to another page-->
+            <h4 class="text-center"><b>Admin Panel Login</b></h4>
+            <input class="form-control" type="text"     name="user" placeholder="Username" autocomplete="off">
+            <input class="form-control" type="password" name="pass" placeholder="Password" autocomplete="new-password">
+            <input class="btn btn-block btn-primary" type="submit" value="Login">
+        </form>
+
+
+
+    <!-- Footer -->
+>>>>>>> 2ca820e6270aed379519dc69bfb6c06aaec24b64
 <?php include $tpl . 'footer.php'; ?>
