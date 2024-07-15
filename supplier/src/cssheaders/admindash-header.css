@@ -1,0 +1,160 @@
+.active {
+    background-color: #9191ad !important;
+}
+
+.text {
+    color: black;
+    font-weight: bold;
+    font-size: 20px;
+}
+
+.table-responsive {
+    animation: fadeIn 0.5s ease-in-out;
+}
+
+@keyframes fadeIn {
+    from { opacity: 0; }
+    to { opacity: 1; }
+}
+
+.modal-content {
+    animation: slideIn 0.5s ease-in-out;
+}
+
+@keyframes slideIn {
+    from { transform: translateY(100%); opacity: 0; }
+    to { transform: translateY(0); opacity: 1; }
+}
+.btn-custom {
+color: white;
+padding: 10px 10px;
+text-align: center;
+text-decoration: none;
+display: inline-block;
+font-size: 16px;
+margin: 4px 2px;
+border: none;
+border-radius: 5px;
+cursor: pointer;
+}
+
+.btn-add {
+background-color: #000080; /* Navy */
+}
+
+.btn-add:hover {
+background-color: #000066; /* Darker Navy */
+}
+
+.btn-download {
+background-color: #000066; /* Green */
+}
+
+.btn-download:hover {
+background-color: #45a049; /* Darker Green */
+}
+/* Base styles for floating messages */
+.floating-message {
+position: fixed;
+bottom: 20px;
+right: 20px;
+background: #333;
+color: #fff;
+padding: 10px 20px;
+border-radius: 5px;
+box-shadow: 0 0 10px rgba(0,0,0,0.5);
+z-index: 1000;
+opacity: 0;
+transition: opacity 0.5s ease-in-out, transform 0.5s ease-in-out;
+transform: translateY(100%);
+}
+
+.floating-message.show {
+opacity: 1;
+transform: translateY(0);
+}
+
+.floating-message.hidden {
+opacity: 0;
+transform: translateY(100%);
+}
+
+#downloadPrompt button {
+margin: 0 5px;
+padding: 5px 10px;
+border: none;
+border-radius: 3px;
+cursor: pointer;
+}
+
+#confirmDownload {
+background: #4CAF50; /* Green */
+color: white;
+}
+
+#cancelDownload {
+background: #f44336; /* Red */
+color: white;
+}
+
+/* Modal Header */
+.modal-header {
+    background-color: #007bff;
+    color: #fff;
+}
+.modal-title {
+    font-weight: bold;
+}
+
+/* Input Group */
+.input-group {
+    margin-bottom: 1rem;
+}
+.form-control {
+    border-radius: 50px 0 0 50px;
+}
+.btn-primary {
+    border-radius: 0 50px 50px 0;
+    background-color: #28a745;
+    border: none;
+}
+.btn-primary:hover {
+    background-color: #218838;
+}
+
+/* Image Results */
+#imageResults img {
+    width: 100%;
+    height: auto;
+    border-radius: 0.5rem;
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+#imageResults img:hover {
+    transform: scale(1.05);
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+}
+
+.search-input {
+    transition: all 0.3s ease;
+}
+
+.search-input:focus {
+    border-color: #007bff;
+    box-shadow: 0 0 5px rgba(0, 123, 255, 0.5);
+}
+
+.search-btn {
+    background-color: transparent;
+    border: none;
+    outline: none;
+    transition: all 0.3s ease;
+}
+
+.search-btn:hover {
+    color: #007bff;
+    transform: scale(1.1);
+}
+
+.search-btn i {
+    font-size: 1.2rem;
+}
