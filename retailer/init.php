@@ -25,6 +25,7 @@ $func = 'includes/functions/'; // Functions Directory
 $css  = 'layout/css/'; // CSS Directory    // $css variable is used in eCommerce\includes\templates\header.php
 $js   = 'layout/js/';  // JS Directory     // $js variable is used in eCommerce\includes\templates\footer.php
 
+// test
 
 // Including the important files
 include $func . 'functions.php'; // functions file
