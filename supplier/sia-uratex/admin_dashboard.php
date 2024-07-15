@@ -1,5 +1,3 @@
-<<<<<<< HEAD
-<<<<<<< HEAD
 <?php
 require "includes/db.inc.php";
 session_start();
@@ -980,6 +978,3 @@ if (mysqli_num_rows($thicknessResult) > 0) {
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.min.js"></script>
 </body>
 </html>
-
-
->>>>>>> 5685e2c4923a7179007dd7aba65b66b17ee06366
