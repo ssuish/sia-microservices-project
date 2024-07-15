@@ -1,4 +1,7 @@
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+>>>>>>> 5685e2c4923a7179007dd7aba65b66b17ee06366
 <?php
 session_start();
 if (!isset($_SESSION['username']) && !isset($_SESSION['email'])) {
@@ -20,6 +23,7 @@ if (!isset($_SESSION['username']) && !isset($_SESSION['email'])) {
         // redirect to admin_dashboard.php
         header("location: ../admin_dashboard.php");
     }
+<<<<<<< HEAD
 =======
 <?php
 session_start();
@@ -43,4 +47,6 @@ if (!isset($_SESSION['username']) && !isset($_SESSION['email'])) {
         header("location: ../admin_dashboard.php");
     }
 >>>>>>> 2ca820e6270aed379519dc69bfb6c06aaec24b64
+=======
+>>>>>>> 5685e2c4923a7179007dd7aba65b66b17ee06366
 ?>

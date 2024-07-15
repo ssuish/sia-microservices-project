@@ -1,4 +1,7 @@
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+>>>>>>> 5685e2c4923a7179007dd7aba65b66b17ee06366
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -69,6 +72,7 @@
   </div>
 </section>
 </body>
+<<<<<<< HEAD
 =======
 <!DOCTYPE html>
 <html lang="en">
@@ -141,4 +145,6 @@
 </section>
 </body>
 >>>>>>> 2ca820e6270aed379519dc69bfb6c06aaec24b64
+=======
+>>>>>>> 5685e2c4923a7179007dd7aba65b66b17ee06366
 </html>

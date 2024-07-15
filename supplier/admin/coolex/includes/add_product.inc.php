@@ -1,4 +1,7 @@
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+>>>>>>> 5685e2c4923a7179007dd7aba65b66b17ee06366
 <?php
 session_start();
 if (!isset($_SESSION['username']) && !isset($_SESSION['email'])) {
@@ -72,6 +75,7 @@ if (isset($_POST['btnAddItem'])) {
         echo "Sorry, there was an error uploading your file.";
     }
 }
+<<<<<<< HEAD
 =======
 <?php
 session_start();
@@ -147,4 +151,6 @@ if (isset($_POST['btnAddItem'])) {
     }
 }
 >>>>>>> 2ca820e6270aed379519dc69bfb6c06aaec24b64
+=======
+>>>>>>> 5685e2c4923a7179007dd7aba65b66b17ee06366
 ?>

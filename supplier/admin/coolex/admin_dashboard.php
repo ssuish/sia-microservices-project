@@ -1,4 +1,7 @@
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+>>>>>>> 5685e2c4923a7179007dd7aba65b66b17ee06366
 <?php
 require "includes/db.inc.php";
 ?>
@@ -246,6 +249,7 @@ require "includes/db.inc.php";
 </body>
 </html>
 
+<<<<<<< HEAD
 =======
 <?php
 require "includes/db.inc.php";
@@ -495,3 +499,5 @@ require "includes/db.inc.php";
 </html>
 
 >>>>>>> 2ca820e6270aed379519dc69bfb6c06aaec24b64
+=======
+>>>>>>> 5685e2c4923a7179007dd7aba65b66b17ee06366
