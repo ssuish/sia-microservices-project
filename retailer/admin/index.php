@@ -1,0 +1,84 @@
+<?php
+// The Admin Panel Login
+
+session_start();
+
+
+$noNavbar = ''; // to prevent adding navbar.php to the page (Refer to init.php and adding navbar.php adding with the if condition)
+$pageTitle = 'Supplier Admin Panel Login'; // Check eCommerce\admin\includes\templates\header.php file    AND    eCommerce\admin\includes\functions\functions.php file
+
+
+// If the current user is authenticated/logged-in, redirect them directly to the eCommerce\admin\dashboard.php page
+if (isset($_SESSION['username'])) { // means if there is a session active (user is already logged-in), don't show them the login HTML form page and redirect him to dashboard.php
+    header('Location: coolex/admin_dashboard.php'); // Redirection to dashboard.php page
+} // Session will be planted at the end of this page before the Markup (HTML)
+
+
+
+include 'init.php';
+// echo "<pre>MY SESSION ARRAY ELEMENTS ARE: \n", print_r($_SESSION), '(from dashboard.php)</pre>';
+
+
+
+// If the HTML Form is submitted (the <button> is clicked)    // Checking if the user is coming through an HTTP POST Request and not from copy paste of the URL (coming from the form at the end of this page)
+if ($_SERVER['REQUEST_METHOD'] == 'POST') { // if the HTML Form is submitted with a POST method/verb HTTP Request
+    $username = $_POST['user'];
+    $password = $_POST['pass'];
+    $hashedPass = sha1($password); // Hashing the passwords for security (to protect passwords from being stolen if a hacker could hack the database)
+
+    // Checking if the user (ADMIN only) exists in the database
+<<<<<<< HEAD
+    $stmt = $con->prepare('SELECT `userID`, `username`, `firstName`, `lastName`, `email` FROM `tbluseraccounts` WHERE `username` = ? AND `password` = ? AND `userRole` = \'SupplierAdmin\' LIMIT 1');
+=======
+    $stmt = $con->prepare('SELECT `userID`, `username`, `firstName`, `lastName`, `email` FROM `tbluseraccounts` WHERE `username` = ? AND `password` = ? AND `userRole` = \'SupplierAdmin\' LIMIT 1'); 
+>>>>>>> 2ca820e6270aed379519dc69bfb6c06aaec24b64
+    $stmt->execute(array(
+        $username, $hashedPass
+    ));
+
+<<<<<<< HEAD
+    $row = $stmt->fetch(); // to print the $row['userID'] for the session below
+=======
+    $row = $stmt->fetch();// to print the $row['userID'] for the session below
+>>>>>>> 2ca820e6270aed379519dc69bfb6c06aaec24b64
+    $count = $stmt->rowCount(); // returns the number of rows affected by the last SQL statement(from execute())
+
+    // If $count > 0, this means that database contains a record about that Username who tries to login (there's an admin with the said credentials), create their Session and allow them to login
+    if ($count > 0) {
+        // Create the user's (admin's) Session
+        $_SESSION['Username'] = $username; // Registering session name (setting the session variable)
+        $_SESSION['ID']       = $row['userID']; // Registering the Session ID as the user's (admin's) ID in the `tbluser_accounts` database table
+
+        // Redirect the user to eCommerce\admin\dashboard.php
+        header('Location: coolex/admin_dashboard.php'); // Redirection to dashboard.php page after logging in / login
+        exit();
+    }
+}
+
+?>
+<<<<<<< HEAD
+
+<form class="login" action="<?php echo $_SERVER['PHP_SELF']; ?>" method="POST"><!--Form will submit data to itself and not to another page-->
+    <h4 class="text-center"><b>Admin Panel Login</b></h4>
+    <input class="form-control" type="text" name="user" placeholder="Username" autocomplete="off">
+    <input class="form-control" type="password" name="pass" placeholder="Password" autocomplete="new-password">
+    <input class="btn btn-block btn-primary" type="submit" value="Login">
+</form>
+
+
+
+<!-- Footer -->
+=======
+        
+        <form class="login" action="<?php echo $_SERVER['PHP_SELF']; ?>" method="POST"><!--Form will submit data to itself and not to another page-->
+            <h4 class="text-center"><b>Admin Panel Login</b></h4>
+            <input class="form-control" type="text"     name="user" placeholder="Username" autocomplete="off">
+            <input class="form-control" type="password" name="pass" placeholder="Password" autocomplete="new-password">
+            <input class="btn btn-block btn-primary" type="submit" value="Login">
+        </form>
+
+
+
+    <!-- Footer -->
+>>>>>>> 2ca820e6270aed379519dc69bfb6c06aaec24b64
+<?php include $tpl . 'footer.php'; ?>
