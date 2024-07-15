@@ -45,4 +45,3 @@ if (isset($_POST["btnUpload"]) && isset($_FILES["txtFile"])) {
     header("Location: admin_Dashboard.php");
     exit();
 }
-?>

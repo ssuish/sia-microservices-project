@@ -4,19 +4,13 @@
 ini_set('display_erros', 'On');
 error_reporting(E_ALL);
 
-
-
 // Connection To Database
 include 'admin/connect.php';
-
-
 
 $sessionUser = ''; // This variable will be used in various files! (e.g. eCommerce\includes\templates\header.php) Check its References (usages) by clicking Shift + F12 in Visual Studio Code
 if (isset($_SESSION['tbluseraccounts'])) {
     $sessionUser = $_SESSION['tbluseraccounts']; // This variable will be used in various files! (e.g. eCommerce\includes\templates\header.php) Check its References (usages) by clicking Shift + F12 in Visual Studio Code
 }
-
-
 
 // Routes
 $tpl  = 'includes/templates/'; // Templates Directory

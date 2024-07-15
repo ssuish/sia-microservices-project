@@ -193,7 +193,6 @@
           <li class="nav-item">
             <a class="nav-link" href="registration/login.php">Login</a>
           </li>
-       
         </ul>
       </div>
     </div>
