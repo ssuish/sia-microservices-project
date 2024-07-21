@@ -56,7 +56,5 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') { // if the HTML Form is submitted wit
     <input class="btn btn-block btn-primary" type="submit" value="Login">
 </form>
 
-
-
 <!-- Footer -->
 <?php include $tpl . 'footer.php'; ?>
