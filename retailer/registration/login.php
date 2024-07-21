@@ -83,10 +83,23 @@
 
                     if (mysqli_num_rows($result) > 0) {
                         $resultSet = mysqli_fetch_assoc($result);
-                        $_SESSION['tbluseraccounts'] = $username;
-                        $_SESSION['uid'] = $resultSet['userID'];
 
-                        echo '
+                        if (!empty($resultSet["token"])) {
+                            echo '
+                            <div class="alert-container">
+                            <div class="alert alert-warning alert-dismissible fade show" role="alert">
+                            <svg class="bi flex-shrink-0 me-2" width="24" height="24" role="img" aria-label="Danger:"><use xlink:href="#exclamation-triangle-fill"/></svg>
+                            User is already registered with Google. Please login with Google.
+                            <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+                            </div>
+                            </div>
+                            ';
+                            exit;
+                        } else {
+                            $_SESSION['tbluseraccounts'] = $username;
+                            $_SESSION['uid'] = $resultSet['userID'];
+
+                            echo '
                             <div class="alert-container">
                             <div class="alert alert-success alert-dismissible fade show" role="alert">
                             <svg class="bi flex-shrink-0 me-2" width="24" height="24" role="img" aria-label="Success:"><use xlink:href="#check-circle-fill"/></svg>
@@ -96,7 +109,9 @@
                             </div>
                         ';
 
-                        header('Location: ../userDashboard.php');
+                            header('Location: ../userDashboard.php');
+                            exit;
+                        }
                     } else {
                         echo '
                             <div class="alert-container">
@@ -181,17 +196,19 @@
                             <div class="d-flex justify-content-center align-items-center mb-3">
                                 <button type="submit" class="btn btn-primary w-50" name="login">Login</button>
                             </div>
-                            <p class="text-center mb-5">Not a member yet? <a href="./signup.php">Register now!</a></p>
+                            <p class="text-center">Not a member yet? <a href="./signup.php">Register now!</a></p>
+                            <p class="text-center mb-3">For employees. <a href="./adminLogin.php">Click here</a></p>
                             <div class="text-center mb-3">
                                 <div class="text-center my-3">
                                     <hr class="d-inline-block" style="width: calc(50% - 20px); vertical-align: middle;">
                                     <span class="px-2">or</span>
                                     <hr class="d-inline-block" style="width: calc(50% - 20px); vertical-align: middle;">
                                 </div>
-                                <?php 
-                                    require_once './oauth/config.php';
+                                <?php
+                                require_once '../oauth/config.php';
+                                $redirectUri = 'http://localhost/sia/project/retailer/userDashboard.php';
                                 ?>
-                                <a class="btn btn-light btn-block mb-5 w-50" href="<?php $client->createAuthURL() ?>">
+                                <a class="btn btn-light btn-block mb-5 w-50" href="<?php echo $client->createAuthUrl(); ?>">
                                     <img src="https://img.icons8.com/color/16/000000/google-logo.png" alt="Google Logo"> Login with Google
                                 </a>
                             </div>

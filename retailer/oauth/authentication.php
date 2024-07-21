@@ -1,41 +1,65 @@
 <?php
-require_once 'config.php';
+error_reporting(E_ALL);
+ini_set('display_errors', 1);
+require_once './config.php';
+require_once './vendor/autoload.php'; // Ensure the Google API PHP Client is loaded
+
+session_start(); // Ensure session is started to use $_SESSION
 
 // authenticate code from Google OAuth Flow
 if (isset($_GET['code'])) {
     $token = $client->fetchAccessTokenWithAuthCode($_GET['code']);
-    $client->setAccessToken($token['access_token']);
+    $client->setAccessToken($token['id']);
 
     // get profile info
-    $google_oauth = new Google_Service_Oauth2($client);
-    $google_account_info = $google_oauth->userinfo->get();
+    $google_oauth = new Google_Service_Oauth2($client); // Make sure Google_Service_Oauth2 is correctly defined
+    $google_account_info = $google_oauth->userinfo->get(); // Correctly access userinfo
     $userinfo = [
-        'email' => $google_account_info['email'],
+        'email' => $google_account_info['email'], // Access properties correctly
         'first_name' => $google_account_info['givenName'],
         'last_name' => $google_account_info['familyName'],
-        'gender' => $google_account_info['gender'],
-        'full_name' => $google_account_info['name'],
-        'picture' => $google_account_info['picture'],
-        'verifiedEmail' => $google_account_info['verifiedEmail'],
-        'token' => $google_account_info['id'],
+        'fullname' => $google_account_info['name'],
+        'token' => $token['id'], // Correctly use the access token from $token array
     ];
 
-    // checking if user is already exists in database
-    $sql = "SELECT * FROM users WHERE email ='{$userinfo['email']}'";
-    $result = mysqli_query($conn, $sql);
-    if (mysqli_num_rows($result) > 0) {
-        // user is exists
-        $userinfo = mysqli_fetch_assoc($result);
+    echo "Binding parameters: " . $userinfo['email'];
+
+    // Ensure $userinfo is defined and is an array before using it
+    if (!isset($userinfo) || !is_array($userinfo)) {
+        echo "User information is not available.";
+        die();
+    }
+
+    // Use prepared statements to prevent SQL injection
+    $stmt = $conn->prepare("SELECT * FROM tbluseraccounts WHERE email = ?");
+    $stmt->bind_param("s", $userinfo['email']);
+    $stmt->execute();
+    $result = $stmt->get_result();
+
+    if ($result->num_rows > 0) {
+        // User exists
+        $userinfo = $result->fetch_assoc();
         $token = $userinfo['token'];
     } else {
-        // user is not exists
-        $sql = "INSERT INTO users (email, first_name, last_name, gender, full_name, picture, verifiedEmail, token) VALUES ('{$userinfo['email']}', '{$userinfo['first_name']}', '{$userinfo['last_name']}', '{$userinfo['gender']}', '{$userinfo['full_name']}', '{$userinfo['picture']}', '{$userinfo['verifiedEmail']}', '{$userinfo['token']}')";
-        $result = mysqli_query($conn, $sql);
-        if ($result) {
-            $token = $userinfo['token'];
+        // User doesn't exist, insert new record
+        $insertStmt = $conn->prepare("INSERT INTO tbluseraccounts (email, firstName, lastName, token) VALUES (?, ?, ?, ?)");
+        if ($insertStmt === false) {
+            error_log("Prepare failed: " . $conn->error);
+            echo "<script>alert('An error occurred during the prepare statement.'); window.location.href='/errorPage.php';</script>";
+            exit();
+        }
+
+        $insertStmt->bind_param("ssss", $userinfo['email'], $userinfo['first_name'], $userinfo['last_name'], $userinfo['token']);
+        if (!$insertStmt->execute()) {
+            echo "<script>alert('An error occurred during the execute statement.'); window.location.href='/errorPage.php';</script>";
+            exit;
+        }
+
+        // Check if the user was successfully inserted
+        if ($insertStmt->affected_rows > 0) {
+            echo "User registered successfully.";
         } else {
-            echo "User is not created";
-            die();
+            echo "User could not be registered.";
         }
     }
 
@@ -43,39 +67,18 @@ if (isset($_GET['code'])) {
     $_SESSION['user_token'] = $token;
 } else {
     if (!isset($_SESSION['user_token'])) {
-        header("Location: index.php");
+        header("Location: ../index.php");
         die();
     }
 
     // checking if user is already exists in database
-    $sql = "SELECT * FROM users WHERE token ='{$_SESSION['user_token']}'";
-    $result = mysqli_query($conn, $sql);
-    if (mysqli_num_rows($result) > 0) {
-        // user is exists
-        $userinfo = mysqli_fetch_assoc($result);
+    $sql = "SELECT * FROM tbluseraccounts WHERE token = ?";
+    $stmt = $conn->prepare($sql);
+    $stmt->bind_param("s", $_SESSION['user_token']);
+    $stmt->execute();
+    $result = $stmt->get_result();
+    if ($result->num_rows > 0) {
+        // user exists
+        $userinfo = $result->fetch_assoc();
     }
 }
-
-?>
-
-<!DOCTYPE html>
-<html lang="en">
-
-<head>
-    <meta charset="UTF-8">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Welcome</title>
-</head>
-
-<body>
-    <img src="<?= $userinfo['picture'] ?>" alt="" width="90px" height="90px">
-    <ul>
-        <li>Full Name: <?= $userinfo['full_name'] ?></li>
-        <li>Email Address: <?= $userinfo['email'] ?></li>
-        <li>Gender: <?= $userinfo['gender'] ?></li>
-        <li><a href="logout.php">Logout</a></li>
-    </ul>
-</body>
-
-</html>
