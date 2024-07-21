@@ -135,6 +135,21 @@
         .btn-google .fa-google {
             margin-right: 10px;
         }
+        .btn-outline-light {
+    border-color: #2575fc; /* Blue border color */
+    color: #2575fc; /* Blue text color */
+    border-radius: 0.375rem;
+    transition: all 0.3s ease;
+    width: 100%;
+}
+
+.btn-outline-light:hover {
+    background-color: #2575fc; /* Blue background on hover */
+    border-color: #2575fc; /* Blue border color on hover */
+    color: #ffffff; /* White text color on hover */
+    transform: scale(1.05);
+}
+
     </style>
 </head>
 
