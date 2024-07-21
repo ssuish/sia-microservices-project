@@ -160,7 +160,7 @@
     <div>
         <div class="text-light">
             <div class="container-md mx-auto d-flex justify-content-center align-items-center flex-column" style="min-height: 100vh; max-width: 40%;">
-                <h1 class="display-1 mb-5">Log In</h1>
+                <h1 class="display-1 mb-5 mt-5">Log In</h1>
                 <div\>
                     <form id="loginForm" action="<?php echo $_SERVER['PHP_SELF'] ?>" method="POST" novalidate>
                         <div class="form-group">
@@ -183,22 +183,17 @@
                             </div>
                             <p class="text-center mb-5">Not a member yet? <a href="./signup.php">Register now!</a></p>
                             <div class="text-center mb-3">
-                                <p>Sign in with:</p>
-                                <button data-mdb-ripple-init type="button" class="btn btn-secondary btn-floating mx-1">
-                                    <i class="fa fa-facebook-f"></i>
-                                </button>
-
-                                <button data-mdb-ripple-init type="button" class="btn btn-secondary btn-floating mx-1">
-                                    <i class="fa fa-google"></i>
-                                </button>
-
-                                <button data-mdb-ripple-init type="button" class="btn btn-secondary btn-floating mx-1">
-                                    <i class="fa fa-twitter"></i>
-                                </button>
-
-                                <button data-mdb-ripple-init type="button" class="btn btn-secondary btn-floating mx-1">
-                                    <i class="fa fa-github"></i>
-                                </button>
+                                <div class="text-center my-3">
+                                    <hr class="d-inline-block" style="width: calc(50% - 20px); vertical-align: middle;">
+                                    <span class="px-2">or</span>
+                                    <hr class="d-inline-block" style="width: calc(50% - 20px); vertical-align: middle;">
+                                </div>
+                                <?php 
+                                    require_once './oauth/config.php';
+                                ?>
+                                <a class="btn btn-light btn-block mb-5 w-50" href="<?php $client->createAuthURL() ?>">
+                                    <img src="https://img.icons8.com/color/16/000000/google-logo.png" alt="Google Logo"> Login with Google
+                                </a>
                             </div>
                         </div>
                     </form>
