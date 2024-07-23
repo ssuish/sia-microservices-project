@@ -3,11 +3,8 @@
 
     <head>
         <title>Admin Login</title>
-        <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
-        <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
-        <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.16.0/umd/popper.min.js"></script>
-        <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
-        <script src="https://kit.fontawesome.com/e6ae4c2598.js" crossorigin="anonymous"></script>
+        <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-QWTKZyjpPEjISv5WaRU9OFeRpok6YctnYmDr5pNlyT2bRjXh0JMhjY6hW+ALEwIH" crossorigin="anonymous">
+    <script src="https://kit.fontawesome.com/e6ae4c2598.js" crossorigin="anonymous"></script>
         <style>
             html {
                 height: 100%;
@@ -207,7 +204,7 @@
                 </div>
             </div>
         </nav>
-        <div class="container glassify">
+        <div class="container glassify" style="min-height: 100vh; max-width: 80%;">
             <div class="left-side p-5">
                 <h2 class="display-3 mb-5">Welcome to Coolex Admin!</h2>
                 <h3 class="display-5">Company Announcements:</h3>
@@ -289,6 +286,7 @@
                 </div>
             </div>
         </div>
+        <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-YvpcrYf0tY3lHB60NNkmXc5s9fDVZLESaAA55NDzOxhy9GkcIdslK1eN7N6jIeHz" crossorigin="anonymous"></script>
     </body>
 
     </html>
