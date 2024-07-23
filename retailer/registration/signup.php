@@ -117,6 +117,7 @@
                             </div>
                             </div>
                         ';
+                            header ("Location: login.php");
                         } else {
                             echo '
                             <div class="alert-container">
@@ -133,7 +134,6 @@
                     }
 
                     mysqli_stmt_close($stmtCheck);
-                    mysqli_stmt_close($stmtInsert);
                     mysqli_close($conn);
                 } else {
                     $errors = array_merge(

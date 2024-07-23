@@ -84,17 +84,16 @@
                     if (mysqli_num_rows($result) > 0) {
                         $resultSet = mysqli_fetch_assoc($result);
 
-                        if (!empty($resultSet["token"])) {
+                        if (!empty($resultSet["role"])) {
                             echo '
                             <div class="alert-container">
                             <div class="alert alert-warning alert-dismissible fade show" role="alert">
                             <svg class="bi flex-shrink-0 me-2" width="24" height="24" role="img" aria-label="Danger:"><use xlink:href="#exclamation-triangle-fill"/></svg>
-                            User is already registered with Google. Please login with Google.
+                            You are logging in as an user. Please login as an Admin <a href="./adminLogin.php">here.</a>.
                             <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
                             </div>
                             </div>
                             ';
-                            exit;
                         } else {
                             $_SESSION['tbluseraccounts'] = $username;
                             $_SESSION['uid'] = $resultSet['userID'];
@@ -197,7 +196,7 @@
                                 <button type="submit" class="btn btn-primary w-50" name="login">Login</button>
                             </div>
                             <p class="text-center">Not a member yet? <a href="./signup.php">Register now!</a></p>
-                            <p class="text-center mb-3">For employees. <a href="./adminLogin.php">Click here</a></p>
+                            <p class="text-center mb-3">Are you an Admin? <a href="./adminLogin.php">Login here.</a></p>
                             <div class="text-center mb-3">
                                 <div class="text-center my-3">
                                     <hr class="d-inline-block" style="width: calc(50% - 20px); vertical-align: middle;">
