@@ -22,6 +22,7 @@
 </head>
 
 <body>
+  <?php require "./oauth/authentication.php"; ?>
   <!-- Navbar -->
   <nav class="navbar navbar-expand-lg navbar-light bg-body-tertiary sticky-top d-flex flex-column">
     <!-- Container wrapper -->

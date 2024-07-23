@@ -1,6 +1,6 @@
 <?php
-require_once '../vendor/autoload.php'; // Ensure the Google API PHP Client is loaded
-require_once '../oauth/secrets.php';
+require_once 'vendor/autoload.php'; // Ensure the Google API PHP Client is loaded
+require_once 'secrets.php';
 
 // create Client Request to access Google API
 $client = new Google_Client();

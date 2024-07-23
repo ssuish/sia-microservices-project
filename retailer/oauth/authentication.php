@@ -1,10 +1,8 @@
 <?php
 error_reporting(E_ALL);
 ini_set('display_errors', 1);
-require_once './config.php';
-require_once './vendor/autoload.php'; // Ensure the Google API PHP Client is loaded
-
-session_start(); // Ensure session is started to use $_SESSION
+require_once 'config.php';
+require_once 'vendor/autoload.php'; // Ensure the Google API PHP Client is loaded
 
 // authenticate code from Google OAuth Flow
 if (isset($_GET['code'])) {
@@ -69,7 +67,16 @@ if (isset($_GET['code'])) {
     */
 
     $token = $client->fetchAccessTokenWithAuthCode($_GET['code']);
-    $client->setAccessToken($token['user_token']);
+
+    if (isset($token['error'])) {
+        throw new Exception('Error fetching access token: ' . $token['error']);
+    }
+
+    if ($token && isset($token['access_token'])) {
+        $client->setAccessToken($token['access_token']);
+    } else {
+        throw new InvalidArgumentException('Invalid JSON token');
+    }
 
     // get profile info
     $google_oauth = new Google_Service_Oauth2($client);
